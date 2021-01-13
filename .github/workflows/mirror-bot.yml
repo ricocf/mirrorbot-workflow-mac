@@ -53,6 +53,7 @@ jobs:
         timeout-minutes: 340
         continue-on-error: true
         run: |
+          eval $(docker-machine env default)
           docker run --privileged --rm -i mirror-bot
 
       - name: Loop Workflow
