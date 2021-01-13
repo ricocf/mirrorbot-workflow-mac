@@ -33,7 +33,7 @@ jobs:
 
       - name: setup vm
         run: |
-          docker-machine create -d virtualbox --virtualbox-disk-size "100000" default
+          docker-machine create -d virtualbox --virtualbox-disk-size=130000 --virtualbox-memory=8192 --virtualbox-cpu-count=2  default
           docker-machine env default
 
       - name: Clone The Secret Mirror Repository
