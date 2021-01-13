@@ -35,7 +35,6 @@ jobs:
         run: |
           docker-machine create -d virtualbox --virtualbox-disk-size "100000" default
           docker-machine env default
-          eval $(docker-machine env default)
 
       - name: Clone The Secret Mirror Repository
         run: |
@@ -45,6 +44,7 @@ jobs:
         run: |
           cd source || exit 1
           git checkout $BRANCH
+          eval $(docker-machine env default)
           docker container prune --force || true
           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t mirror-bot
           docker image ls
