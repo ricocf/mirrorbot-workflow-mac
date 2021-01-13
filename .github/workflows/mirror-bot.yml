@@ -10,6 +10,7 @@ env:
   # Change these values if you have forked it for your own works
   GitHubMail: "manofuranium@gmail.com"
   GitHubName: "ElytrA8" 
+  BRANCH: "#2"
 
 jobs:
   build:
@@ -43,6 +44,7 @@ jobs:
       - name: Compile The Mirroring Docker Container
         run: |
           cd source || exit 1
+          git checkout $BRANCH
           docker container prune --force || true
           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t mirror-bot
           docker image ls
