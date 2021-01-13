@@ -13,7 +13,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
@@ -26,8 +26,15 @@ jobs:
           git config --global credential.helper store
           echo "https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
-      # Cleanup The Actions Workspace Using Custom Composite Run Actions
-      - uses: rokibhasansagar/slimhub_actions@main
+      - name: setup docker
+        run: |
+          brew install docker docker-machine virtualbox
+
+      - name: setup vm
+        run: |
+          docker-machine create -d virtualbox --virtualbox-disk-size "100000" default
+          docker-machine env default
+          eval $(docker-machine env default)
 
       - name: Clone The Secret Mirror Repository
         run: |
