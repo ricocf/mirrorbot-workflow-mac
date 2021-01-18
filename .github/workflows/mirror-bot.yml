@@ -14,7 +14,7 @@ env:
 
 jobs:
   build:
-    runs-on: macos-11.0
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
@@ -33,7 +33,7 @@ jobs:
 
       - name: setup vm
         run: |
-          docker-machine create -d virtualbox --virtualbox-disk-size=220000 --virtualbox-memory=8192 --virtualbox-cpu-count=2  default
+          docker-machine create -d virtualbox --virtualbox-disk-size=150000 --virtualbox-memory=8192 --virtualbox-cpu-count=2  default
           docker-machine env default
 
       - name: Clone The Secret Mirror Repository
